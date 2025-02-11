@@ -1,0 +1,20 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scrollbar-width: thin;
+}
+
+*::selection {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+body {
+  font-family: 'Noto Sans JP', serif;
+  background: #eee;
+  color: #fff;
+  overflow-x: hidden;
+  min-height: 100vh;
+  line-height: 1.5;
+  user-select: none;
+}

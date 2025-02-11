@@ -1,0 +1,19 @@
+{
+  "name": "@himeno/sena",
+  "exports": {},
+  "tasks": {
+    "dev": "deno serve --host 0.0.0.0 --allow-net --allow-read --allow-write --allow-run server.ts",
+    "build": "deno run --allow-read --allow-write --allow-run build.ts"
+  },
+  "imports": {
+    "lit": "https://esm.sh/lit@3.2.1",
+    "lit/decorators": "https://esm.sh/lit@3.2.1/decorators.js"
+  },
+  "compilerOptions": {
+    "lib": [
+      "deno.ns",
+      "dom"
+    ],
+    "strict": true
+  }
+}
