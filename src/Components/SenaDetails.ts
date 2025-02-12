@@ -1,36 +1,42 @@
-import { css, html, LitElement } from "lit";
+import { html, LitElement } from "lit";
 import { customElement } from "lit/decorators";
+import { IS_PHONE } from "../constant.ts";
+import { I18n } from "../utils/i18n.ts";
 
 @customElement("sena-details")
 export class SenaDetails extends LitElement {
-  public static readonly styles = css`
-  .details {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 2rem;
-    justify-content: center;
+  private details: [string, string, boolean][] = [
+    [I18n.t`details.line1.front`, I18n.t`details.line1.back`, false],
+    [I18n.t`details.line2.front`, I18n.t`details.line2.back`, false],
+    [I18n.t`details.line3.front`, I18n.t`details.line3.back`, false],
+    [I18n.t`details.line4.front`, I18n.t`details.line4.back`, false],
+  ];
+
+  private onMouseEnterFactory(index: number) {
+    return () => {
+      this.details[index][2] = true;
+      this.requestUpdate();
+    };
   }
 
-  .details>div {
-    background: rgba(0, 0, 0, 0.2);
-    padding: 1rem 2rem;
-    border-radius: 1rem;
-    backdrop-filter: blur(4px);
-    box-shadow: 0 2px 10px rgba(255, 255, 255, 0.2);
+  private onMouseLeaveFactory(index: number) {
+    return () => {
+      this.details[index][2] = false;
+      this.requestUpdate();
+    };
   }
-
-  .details>div:hover {
-    box-shadow: 0 4px 15px rgba(255, 255, 255, 0.3);
-  }
-  `;
 
   public override render() {
-    return html`
+    return IS_PHONE ? "" : html`
+      <link rel="stylesheet" href="/styles.css">
       <div class="details">
-        <div>B:85 W:52 H:91</div>
-        <div>Gemini</div>
-        <div>12 June</div>
-        <div>Type A</div>
+      ${
+      this.details.map(([front, back, isHovering], index) =>
+        html`<div @mouseenter=${this.onMouseEnterFactory(index)} @mouseleave=${
+          this.onMouseLeaveFactory(index)
+        }>${isHovering ? back : front}</div>`
+      )
+    }
       </div>
     `;
   }

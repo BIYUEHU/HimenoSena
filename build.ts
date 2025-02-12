@@ -52,4 +52,5 @@ Deno.writeTextFileSync(`${DEST_DIR}/index.php`, `${indexPhp}\n${indexHtml}`);
 new Deno.Command(Deno.execPath(), {
   args: ["bundle", "src/main.ts", `${DEST_DIR}/bundle.js`],
 }).spawn();
+
 console.log("Build complete.");

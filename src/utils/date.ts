@@ -41,10 +41,3 @@ export function daysSince<
 
   return Math.floor(timeDifference / (1000 * 3600 * 24)) as R;
 }
-
-const _result = [
-  validateDate("2022-2-29"),
-  validateDate("202x-2-30"),
-  daysSince("2022-02-29"),
-  daysSince("202x-2-30"),
-] as const;

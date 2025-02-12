@@ -1,13 +1,18 @@
+import { DEFAULT_SETTINGS_SWITCH_TIME } from "../constant.ts";
+import { getStorageFiled, StorageKeys } from "../data/storage.ts";
+import { betterTimeout } from "./timer.ts";
+
 export interface EventsList {
   updateContent(): void;
-  adaptTextColor(isBrightBackground: boolean): void;
+  adaptTextColor(): void;
+  setModal(isOpen: boolean): void;
 }
 
 type EventsListMapping = {
   [key in keyof EventsList]?: EventsList[key][];
 };
 
-export class EventsEmmiter {
+export class SenaEventsEmmiter {
   private static readonly events: EventsListMapping = {};
 
   public static on<E extends keyof EventsList>(
@@ -31,4 +36,19 @@ export class EventsEmmiter {
       );
     }
   }
+}
+
+export function eventsLooper() {
+  const switchTime = getStorageFiled(
+    StorageKeys.SETTINGS_SWITCH_TIME,
+    DEFAULT_SETTINGS_SWITCH_TIME,
+  );
+  if (switchTime === 0) return;
+  betterTimeout(
+    () => {
+      eventsLooper();
+      SenaEventsEmmiter.emit("updateContent");
+    },
+    switchTime * 1000 + 1500 + 100,
+  );
 }

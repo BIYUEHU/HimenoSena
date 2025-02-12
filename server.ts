@@ -25,7 +25,7 @@ async function watchFiles() {
     if (
       ["modify", "create", "remove"].includes(event.kind)
     ) {
-      console.log(`File ${event.paths[0]} changed`);
+      console.log(`File ${event.paths[0]} ${event.kind}`);
       lastChanged = Date.now();
       clients.map((socket) => socket.send(""));
     }

@@ -1,67 +1,72 @@
-import { css, html, LitElement } from "lit";
+import { html, LitElement } from "lit";
 import { customElement } from "lit/decorators";
+import { nextTick, sleep } from "../utils/timer.ts";
+import { SenaEventsEmmiter } from "../utils/eventsEmiter.ts";
+import { SenaState } from "../data/state.ts";
+import { BACKGROUND_LIST, BRIGHT_BACKGROUND_LIST } from "../constant.ts";
 import "./SenaTextBlock.ts";
-import { betterTimeout } from "../utils/timer.ts";
-import { EventsEmmiter } from "../utils/eventsEmiter.ts";
 
 @customElement("sena-background")
 export class SenaBackground extends LitElement {
-  public static readonly styles = css`
-  #bg {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    opacity: 0.85;
-    transition: opacity 1.5s;
-  }`;
-
-  private getBackground(): string {
-    const prevBackground = this.background;
-    const result = `/pics/${Math.floor(Math.random() * 8) + 1}.png`;
-    if (prevBackground && prevBackground === result) {
-      return this.getBackground();
-    }
+  private static getBackground() {
+    const result = BACKGROUND_LIST[
+      Math.floor(Math.random() * BACKGROUND_LIST.length)
+    ];
+    SenaState.isBrightBackground = BRIGHT_BACKGROUND_LIST.includes(
+      result,
+    );
     return result;
   }
 
-  private static readonly brightBackgroundIdList = [4, 7, 8];
+  private static preloadImages() {
+    const preloadContainer = document.createElement("div");
+    preloadContainer.style.display = "none";
+    document.body.appendChild(preloadContainer);
 
-  private background = this.getBackground();
+    BACKGROUND_LIST.map((imageSrc) => {
+      const img = document.createElement("img");
+      img.src = imageSrc;
+      preloadContainer.appendChild(img);
+    });
+  }
 
-  private updateBackground() {
-    const ref = (this.shadowRoot!.querySelector("#bg") as HTMLImageElement)!;
+  private background = SenaBackground.getBackground();
+
+  private get backgroundRef() {
+    return (this.shadowRoot!.querySelector("#bg") as HTMLImageElement)!;
+  }
+
+  private async updateBackground() {
+    const ref = this.backgroundRef;
     ref.style.opacity = "0";
     this.requestUpdate();
 
-    betterTimeout(() => {
-      this.background = this.getBackground();
-      ref.src = this.background;
-      EventsEmmiter.emit(
-        "adaptTextColor",
-        SenaBackground.brightBackgroundIdList.includes(Number(
-          this.background.slice(this.background.lastIndexOf("/") + 1).split(
-            ".",
-          )[0],
-        )),
-      );
-      this.requestUpdate();
-      betterTimeout(() => {
-        ref.style.opacity = "0.85";
-        this.requestUpdate();
-      }, 100);
-    }, 1500);
+    await sleep(1500);
+    this.background = SenaBackground.getBackground();
+    ref.src = this.background;
+    SenaEventsEmmiter.emit(
+      "adaptTextColor",
+    );
+    this.requestUpdate();
+
+    await sleep(100);
+    ref.style.opacity = "0.85";
+    this.requestUpdate();
   }
 
   public override render() {
     return html`
+    <link rel="stylesheet" href="/styles.css">
     <img id="bg" src="${this.background}" alt="Background Image">
     `;
   }
 
   public override firstUpdated() {
-    EventsEmmiter.on("updateContent", () => this.updateBackground());
+    nextTick(() => SenaBackground.preloadImages());
+    const ref = this.backgroundRef;
+    ["touchstart", "contextmenu", "touchmove"].map((eventName) =>
+      ref.addEventListener(eventName, (event) => event.preventDefault())
+    );
+    SenaEventsEmmiter.on("updateContent", () => this.updateBackground());
   }
 }
