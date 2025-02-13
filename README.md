@@ -15,7 +15,7 @@ Please refer to the article [我做了一个姬野星奏的专属网站](/docs/a
 
 ## Contributors (星厨名单)
 
-[![Contributors](https://contrib.rocks/image?repo=biyuehu/HimenoSena)](https://github.com/biyuehu/HimenoSena/graphs/contributors)
+[![Contributors](https://contrib.rocks/image?repo=biyuehu/himenosena)](https://github.com/biyuehu/HimenoSena/graphs/contributors)
 
 ## Stacks
 
