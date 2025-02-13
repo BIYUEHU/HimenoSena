@@ -10,13 +10,19 @@
 - メッセージは英語、日本語、または中国語で投稿してください。
 - 留言内容请使用英文、日文或中文。
 
+---
+
 - Although the server is not located in China, domain names are still regulated by Chinese authorities, so please don't post any sensitive or unfavorable content about China.
 - サーバーは中国に位置していませんが、ドメイン名は中国当局によって規制されているため、中国に関する敏感または不利なコンテンツは投稿しないでください。
 <!-- - 尽管服务器不在中国，但域名仍然受到中国当局的监管，因此请不要发布任何关于中国的敏感或不利内容。 -->
 
+---
+
 - The messages should be related to **Himeno Sena**, and only welcome and allow people who like **Himeno Sena** to leave a message. Spammers, please get out.
 - メッセージは**姬野星奏**に関連するものでなければならず、**姬野星奏**が好きな人のみがメッセージを残すことができます。スパマーは出て行ってください。
 - 留言内容应与**姬野星奏**相关，只欢迎星奏厨进行留言，你可以在这留下你对星奏想说的任何话，或者发表感想，或者直接倾诉你的爱意！但星黑请自行滚出去。
+
+---
 
 - Generally, don't limit the number of messages, but please don't post too many messages in a short time. One message at a time is best.
 - 基本的に、メッセージの数に制限はありませんが、短時間に大量のメッセージを投稿しないでください。一度に1つのメッセージが最適です。
@@ -61,7 +67,7 @@
 ]
 ```
 
-For Chinese People：
+For Chinese people：
 
 - 除双引号内的内容外，双引号外的所有符号应使用英文符号，避免使用中文符号或全角符号。
 - 无效符号：`，` `【` `“`
@@ -80,5 +86,3 @@ For Chinese People：
 - Wait for your pull request to be merged (You will receive a notification from GitHub). It usually takes a few hours to a day. Most after 30 minutes of your pull request being merged (this is time of server cache updating), you will probably see your messages on the website.
 - プルリクエストがマージされるのを待ちます（GitHubから通知が届きます）。通常、数時間から1日程度かかります。プルリクエストがマージされた後、通常30分以内（サーバーキャッシュの更新時間）で、ウェブサイトでメッセージが表示されるでしょう。
 - 等待你的 pull request 被合并（你将收到 GitHub 的通知邮件）。通常需要几个小时到一天的时间。最多在 pull request 被合并后的 30 分钟后（服务器缓存更新间隔），你将可能在网站上看到你的留言。
-
----
