@@ -1,5 +1,7 @@
 # Himeno Sena
 
+[![Build](https://github.com/BIYUEHU/HimenoSena/actions/workflows/build.yml/badge.svg)](https://github.com/BIYUEHU/HimenoSena/actions/workflows/build.yml) ![License](https://img.shields.io/badge/license-BCU-E6AD88) ![GitHub contributors](https://img.shields.io/github/contributors/biyuehu/HimenoSena)
+
 Hi there! This is a character website project designed for **Himeno Sena**.
 
 - **Himeno Sena** (姫野星奏/ひめのせな) is a main character in the Japanese visual novel [Koi x Shin Ai Kanojo (恋×シンアイ彼女)](http://ustrack.amusecraft.com/koikake/).
@@ -19,7 +21,7 @@ Please refer to the article [我做了一个姬野星奏的专属网站](/docs/a
 
 - Pages: Lit & Web Component (Fucking Vue, React, Angular, Svelte and Solid)
 - PHP (Only used to count the number of visitors and sync messages list from GitHub)
-- Development Environment: Deno 2.0 (Fucking Node.Js)
+- Development Environment: Deno (Fucking Node.Js)
 - Editor: Zed (Fucking VSCode)
 - CICD: GitHub Actions
 - Version Control: Git
