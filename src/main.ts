@@ -8,10 +8,10 @@ bootstrap("姫野星奏、最高！").then(() => {
     "If you like this, please give me a star on GitHub~: https://github.com/biyuehu/HimenoSena",
   );
   log(
-    `Messages list last upated: ${
-      METADATA.lastUpdated === 0
-        ? "Unknown"
-        : new Date(METADATA.lastUpdated).toLocaleString()
+    `Messages list last updated at ${
+      METADATA.lastUpdated
+        ? new Date(METADATA.lastUpdated).toLocaleString()
+        : "Unknown"
     }`,
   );
 }).catch((err) => {

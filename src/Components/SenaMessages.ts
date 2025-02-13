@@ -4,6 +4,7 @@ import { customElement } from "lit/decorators";
 import { SenaState } from "../data/state.ts";
 import { GITHUB_URL, LEAVE_MESSAGES_DOCS } from "../constant.ts";
 import { I18n } from "../utils/i18n.ts";
+import { SenaEventsEmmiter } from "../utils/eventsEmiter.ts";
 import "./SenaTextBlock.ts";
 
 @customElement("sena-messages")
@@ -29,5 +30,9 @@ export class SenaMessages extends LitElement {
       .t`messages.button`}</a>
     </sena-text-block>
     `;
+  }
+
+  public override firstUpdated() {
+    SenaEventsEmmiter.on("updateMessages", () => this.refreshMessage());
   }
 }

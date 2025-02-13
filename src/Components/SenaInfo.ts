@@ -3,6 +3,7 @@ import { customElement } from "lit/decorators";
 import { IS_PHONE, METADATA, REPO_URL } from "../constant.ts";
 import { SenaState } from "../data/state.ts";
 import { I18n } from "../utils/i18n.ts";
+import { SenaEventsEmmiter } from "../utils/eventsEmiter.ts";
 import "./SenaTextBlock.ts";
 
 @customElement("sena-info")
@@ -24,5 +25,9 @@ export class SenaInfo extends LitElement {
       Made With Love and Open Sourced on <a target="_blank" href="${REPO_URL}">GitHub</a>.
     </sena-text-block>
     `;
+  }
+
+  public override firstUpdated() {
+    SenaEventsEmmiter.on("updateMessages", () => this.requestUpdate());
   }
 }

@@ -1,0 +1,29 @@
+name: Build
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Deno
+        uses: denoland/setup-deno@v2
+        with:
+          deno-version: '2.0'
+
+      - name: Build project
+        run: deno task build
+
+      - name: Create build archive
+        run: |
+          tar -czf himeno-sena.tar.gz -C build .
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: himeno-sena
+          path: himeno-sena.tar.gz

@@ -6,6 +6,7 @@ export interface EventsList {
   updateContent(): void;
   adaptTextColor(): void;
   setModal(isOpen: boolean): void;
+  updateMessages(): void;
 }
 
 type EventsListMapping = {

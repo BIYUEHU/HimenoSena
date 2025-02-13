@@ -5,6 +5,7 @@ import { getMessagesList } from "../http/index.ts";
 import { error } from "../utils/logger.ts";
 import { betterTimeout } from "../utils/timer.ts";
 import { getStorageFiled, setStorageFiled, StorageKeys } from "./storage.ts";
+import { SenaEventsEmmiter } from "../utils/eventsEmiter.ts";
 
 export class SenaState {
   public static isBrightBackground = false;
@@ -36,6 +37,7 @@ export class SenaState {
   public static setMessagesList() {
     getMessagesList().then((res) => {
       SenaState.messagesList = res;
+      SenaEventsEmmiter.emit("updateMessages");
     }).catch(() => {
       error("[Sena] Failed to fetch messages list");
     });
