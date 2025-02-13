@@ -6,7 +6,7 @@ export const DEFAULT_SETTINGS_AUTOPLAY = true;
 
 export const DEFAULT_SETTINGS_SWITCH_TIME = 60;
 
-export const DEFAULT_SETTINGS_START_DATE = "2023-07-03";
+export const DEFAULT_SETTINGS_START_DATE = "2023-07-05";
 
 export const METADATA: Metadata = ((globalThis as {
   sena_metadata?: Metadata;

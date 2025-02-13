@@ -41,7 +41,7 @@ if (($GLOBALS['currentTimestamp'] - $GLOBALS['metaData']['lastChecked']) > 10 * 
 
 $existingIps = file_get_contents(DATA_FILE);
 $views = count(explode('|', $existingIps)) - 1;
-$isRecorded = str_contains($existingIps, $_SERVER['REMOTE_ADDR']);
+$isRecorded = strstr($existingIps, $_SERVER['REMOTE_ADDR']);
 
 ?>
 <script>
