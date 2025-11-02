@@ -1,19 +1,19 @@
-import { html, LitElement } from "lit";
-import { customElement } from "lit/decorators";
-import "./SenaTextBlock.ts";
+import { html, LitElement } from 'lit'
+import { customElement } from 'lit/decorators'
+import './SenaTextBlock.ts'
 
-@customElement("sena-about")
+@customElement('sena-about')
 export class SenaAbout extends LitElement {
-  private isHovering = false;
+  private isHovering = false
 
   private onMouseEnter() {
-    this.isHovering = true;
-    this.requestUpdate();
+    this.isHovering = true
+    this.requestUpdate()
   }
 
   private onMouseLeave() {
-    this.isHovering = false;
-    this.requestUpdate();
+    this.isHovering = false
+    this.requestUpdate()
   }
 
   public override render() {
@@ -33,6 +33,6 @@ export class SenaAbout extends LitElement {
         洸太郎だけは彼女の笑顔をまっすぐ見られない。<br />
         転校が多く、幼少の頃に一時期 御影ヶ丘町に住んでいたことがある。`
     }</sena-text-block>
-    `;
+    `
   }
 }

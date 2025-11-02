@@ -1,55 +1,44 @@
-import { DEFAULT_SETTINGS_SWITCH_TIME } from "../constant.ts";
-import { getStorageFiled, StorageKeys } from "../data/storage.ts";
-import { betterTimeout } from "./timer.ts";
+import { DEFAULT_SETTINGS_SWITCH_TIME } from '../constant.ts'
+import { getStorageFiled, StorageKeys } from '../data/storage.ts'
+import { betterTimeout } from './timer.ts'
 
 export interface EventsList {
-  updateContent(): void;
-  adaptTextColor(): void;
-  setModal(isOpen: boolean): void;
-  updateMessages(): void;
+  updateContent(): void
+  adaptTextColor(): void
+  setModal(isOpen: boolean): void
+  updateMessages(): void
 }
 
 type EventsListMapping = {
-  [key in keyof EventsList]?: EventsList[key][];
-};
+  [key in keyof EventsList]?: EventsList[key][]
+}
 
 export class SenaEventsEmmiter {
-  private static readonly events: EventsListMapping = {};
+  private static readonly events: EventsListMapping = {}
 
-  public static on<E extends keyof EventsList>(
-    event: E,
-    listener: EventsList[E],
-  ) {
-    if (!this.events[event]) {
-      this.events[event] = [listener] as EventsListMapping[E];
+  public static on<E extends keyof EventsList>(event: E, listener: EventsList[E]) {
+    if (!SenaEventsEmmiter.events[event]) {
+      SenaEventsEmmiter.events[event] = [listener] as EventsListMapping[E]
     } else {
-      this.events[event].push(listener);
+      SenaEventsEmmiter.events[event].push(listener)
     }
   }
 
-  public static emit<E extends keyof EventsList>(
-    event: E,
-    ...args: Parameters<EventsList[E]>
-  ) {
-    if (this.events[event]) {
-      this.events[event].map((listener) =>
-        (listener as () => void)(...(args as []))
-      );
+  public static emit<E extends keyof EventsList>(event: E, ...args: Parameters<EventsList[E]>) {
+    if (SenaEventsEmmiter.events[event]) {
+      SenaEventsEmmiter.events[event].map((listener) => (listener as () => void)(...(args as [])))
     }
   }
 }
 
 export function eventsLooper() {
-  const switchTime = getStorageFiled(
-    StorageKeys.SETTINGS_SWITCH_TIME,
-    DEFAULT_SETTINGS_SWITCH_TIME,
-  );
-  if (switchTime === 0) return;
+  const switchTime = getStorageFiled(StorageKeys.SETTINGS_SWITCH_TIME, DEFAULT_SETTINGS_SWITCH_TIME)
+  if (switchTime === 0) return
   betterTimeout(
     () => {
-      eventsLooper();
-      SenaEventsEmmiter.emit("updateContent");
+      eventsLooper()
+      SenaEventsEmmiter.emit('updateContent')
     },
-    switchTime * 1000 + 1500 + 100,
-  );
+    switchTime * 1000 + 1500 + 100
+  )
 }

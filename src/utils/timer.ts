@@ -2,21 +2,21 @@ export function betterTimeout(fn: () => void, ms: number): Promise<void> {
   return new Promise((resolve, reject) => {
     const timer = setTimeout(() => {
       try {
-        fn();
-        resolve();
+        fn()
+        resolve()
       } catch (e) {
-        reject(e);
+        reject(e)
       } finally {
-        clearTimeout(timer);
+        clearTimeout(timer)
       }
-    }, ms);
-  });
+    }, ms)
+  })
 }
 
 export function sleep(ms: number): Promise<void> {
-  return betterTimeout(() => {}, ms);
+  return betterTimeout(() => {}, ms)
 }
 
 export function nextTick(fn: () => void = () => {}) {
-  return betterTimeout(fn, 0);
+  return betterTimeout(fn, 0)
 }
