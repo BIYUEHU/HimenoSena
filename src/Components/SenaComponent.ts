@@ -1,13 +1,14 @@
-import { html, LitElement } from "lit";
-import "./SenaBackground.ts";
-import "./SenaTitle.ts";
-import "./SenaQuotes.ts";
-import "./SenaDetails.ts";
-import "./SenaAbout.ts";
-import "./SenaMessages.ts";
-import "./SenaInfo.ts";
-import "./SenaSoundToggle.ts";
-import "./SenaModal.ts";
+import { html, LitElement } from 'lit'
+import './SenaBackground.ts'
+import './SenaTitle.ts'
+import './SenaQuotes.ts'
+import './SenaDetails.ts'
+import './SenaAbout.ts'
+import './SenaMessages.ts'
+import './SenaInfo.ts'
+import './SenaSoundToggle.ts'
+import './SenaModal.ts'
+import './SenaNotification.ts'
 
 export class SenaComponent extends LitElement {
   public override render() {
@@ -26,6 +27,7 @@ export class SenaComponent extends LitElement {
     </div>
     <sena-sound-toggle></sena-sound-toggle>
     <sena-modal></sena-modal>
-    `;
+    <sena-notification></sena-notification>
+    `
   }
 }
