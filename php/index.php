@@ -6,9 +6,14 @@ $GLOBALS['currentTimestamp'] = round(microtime(true) * 1000);
 
 if (file_exists(META_FILE)) {
   $GLOBALS['metaData'] = json_decode(file_get_contents(META_FILE), true);
+  if (!is_array($GLOBALS['metaData'])) {
+    $GLOBALS['metaData'] = [];
+  }
 } else {
   $GLOBALS['metaData'] = ['lastChecked' => 0, 'lastUpdated' => 0];
 }
+
+$GLOBALS['metaData'] += ['lastChecked' => 0, 'lastUpdated' => 0];
 
 function fetchMessages()
 {

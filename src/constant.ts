@@ -27,17 +27,16 @@ export const REPO_URL = `${GITHUB_URL}/biyuehu/HimenoSena`
 export const LEAVE_MESSAGES_DOCS = `${REPO_URL}/blob/main/docs/messages.md`
 
 export const BACKGROUND_LIST = [
-  'https://cdn.img.huoshen80.top/i/2025/02/12/67ac95d855efa.png',
-  'https://cdn.img.huoshen80.top/i/2025/02/12/67ac95d9601e9.png',
-  'https://cdn.img.huoshen80.top/i/2025/02/12/67ac95d9bdec1.png',
-  'https://cdn.img.huoshen80.top/i/2025/02/12/67ac95dabf616.png',
-  'https://cdn.img.huoshen80.top/i/2025/02/12/67ac95db88a64.png',
-  'https://cdn.img.huoshen80.top/i/2025/02/12/67ac95dccc294.png',
-  'https://cdn.img.huoshen80.top/i/2025/02/12/67ac95dd173bb.png',
-  'https://cdn.img.huoshen80.top/i/2025/02/12/67ac95ded22ca.png'
+  'https://cdn.img.huoshen80.top/i/2025/11/11/6912c10fb847c.png',
+  'https://cdn.img.huoshen80.top/i/2025/11/11/6912c1307f2b8.png',
+  'https://cdn.img.huoshen80.top/i/2025/11/11/6912c16f34120.png',
+  'https://cdn.img.huoshen80.top/i/2025/11/11/6912c198278bc.png',
+  'https://cdn.img.huoshen80.top/i/2025/11/11/6912c1b1cb865.png',
+  'https://cdn.img.huoshen80.top/i/2025/11/11/6912c1b6e7998.png',
+  'https://cdn.img.huoshen80.top/i/2025/11/11/6912c1b89c6d3.png'
 ]
 
-export const BRIGHT_BACKGROUND_LIST = [0, 6, 7].map((index) => BACKGROUND_LIST[index])
+export const BRIGHT_BACKGROUND_LIST = [0, 5, 6].map((index) => BACKGROUND_LIST[index])
 
 export const QUOTES_LIST: [string, string?][] = [
   ['苟利星奏生死以，岂因新岛避趋之'],

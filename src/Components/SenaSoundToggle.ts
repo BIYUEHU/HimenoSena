@@ -2,10 +2,15 @@ import { html, LitElement } from 'lit'
 import { customElement } from 'lit/decorators'
 import { AUDIOS, DEFAULT_SETTINGS_AUTOPLAY } from '../constant.ts'
 import { getStorageFiled, StorageKeys } from '../data/storage.ts'
+import { SenaEventsEmmiter } from '../utils/eventsEmiter.ts'
 import { betterTimeout } from '../utils/timer.ts'
 
 @customElement('sena-sound-toggle')
 export class SenaSoundToggle extends LitElement {
+  private readonly audioIndex = Math.floor(Math.random() * AUDIOS.length)
+
+  private isFirstPlaySuccess = true
+
   private get bgmRef() {
     return this.shadowRoot!.querySelector('#bgm') as HTMLAudioElement
   }
@@ -27,6 +32,9 @@ export class SenaSoundToggle extends LitElement {
       .then(() => {
         this.soundButtonRef.textContent = '🎵'
         this.autoPlayFailed = false
+        if (!this.isFirstPlaySuccess) return
+        SenaEventsEmmiter.emit('notify', `Playing ${AUDIOS[this.audioIndex]}`)
+        this.isFirstPlaySuccess = false
       })
       .catch(() => {
         this.pauseSound()
@@ -49,7 +57,7 @@ export class SenaSoundToggle extends LitElement {
     return html`
     <link rel="stylesheet" href="/styles.css">
     <audio id="bgm" loop>
-      <source src="/assets/${Math.floor(Math.random() * AUDIOS.length) + 1}.mp3" type="audio/mp3">
+      <source src="/assets/${this.audioIndex + 1}.mp3" type="audio/mp3">
     </audio>
     <button class="fixed-button-common" id="sound-toggle" @click=${this.toggleSound}>🎵</button>
     `
