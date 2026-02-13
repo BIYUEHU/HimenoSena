@@ -36,4 +36,4 @@ Please refer to the article [我做了一个姬野星奏的专属网站](/docs/a
 
 ## License
 
-Open source under the BCU license.
+Under the `GPL-3.0-or-later` license.
