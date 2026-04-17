@@ -27,13 +27,13 @@ export const REPO_URL = `${GITHUB_URL}/biyuehu/HimenoSena`
 export const LEAVE_MESSAGES_DOCS = `${REPO_URL}/blob/main/docs/messages.md`
 
 export const BACKGROUND_LIST = [
-  'https://cdn.img.huoshen80.top/i/2025/11/11/6912c10fb847c.png',
-  'https://cdn.img.huoshen80.top/i/2025/11/11/6912c1307f2b8.png',
-  'https://cdn.img.huoshen80.top/i/2025/11/11/6912c16f34120.png',
-  'https://cdn.img.huoshen80.top/i/2025/11/11/6912c198278bc.png',
-  'https://cdn.img.huoshen80.top/i/2025/11/11/6912c1b1cb865.png',
-  'https://cdn.img.huoshen80.top/i/2025/11/11/6912c1b6e7998.png',
-  'https://cdn.img.huoshen80.top/i/2025/11/11/6912c1b89c6d3.png'
+  'https://img0.huoshen80.top/i/2025/11/11/6912c10fb847c.png',
+  'https://img0.huoshen80.top/i/2025/11/11/6912c1307f2b8.png',
+  'https://img0.huoshen80.top/i/2025/11/11/6912c16f34120.png',
+  'https://img0.huoshen80.top/i/2025/11/11/6912c198278bc.png',
+  'https://img0.huoshen80.top/i/2025/11/11/6912c1b1cb865.png',
+  'https://img0.huoshen80.top/i/2025/11/11/6912c1b6e7998.png',
+  'https://img0.huoshen80.top/i/2025/11/11/6912c1b89c6d3.png'
 ]
 
 export const BRIGHT_BACKGROUND_LIST = [0, 5, 6].map((index) => BACKGROUND_LIST[index])
