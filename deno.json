@@ -6,8 +6,8 @@
     "build": "deno run --allow-read --allow-write --allow-run build.ts"
   },
   "imports": {
-    "lit": "https://esm.sh/lit@3.2.1",
-    "lit/decorators": "https://esm.sh/lit@3.2.1/decorators.js"
+    "lit": "https://esm.sh/lit",
+    "lit/decorators": "https://esm.sh/lit/decorators.js"
   },
   "compilerOptions": {
     "lib": [
