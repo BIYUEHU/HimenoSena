@@ -45,7 +45,15 @@ copyFile(PUBLIC_DIR, DEST_DIR);
 copyFile(PHP_DIR, DEST_DIR, (name) => name.endsWith(".php"));
 
 await new Deno.Command(Deno.execPath(), {
-  args: ["bundle", "src/main.ts", `${DEST_DIR}/bundle.js`],
+  args: [
+    "bundle",
+    "--platform",
+    "browser",
+    "--minify",
+    "--output",
+    `${DEST_DIR}/bundle.js`,
+    "src/main.ts",
+  ],
 }).spawn().output();
 
 const time = new Date().toLocaleString();
@@ -54,7 +62,7 @@ const htmlComment =
 <!-- Build time: ${time} -->`;
 const jsAndCssComment = /* js */ `/**
  * @project https://github.com/biyuehu/HimenoSena
- * @license BCU
+ * @license SENA WITH GPL-3.0
  * @build ${time}
  */`;
 

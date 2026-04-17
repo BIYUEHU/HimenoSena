@@ -1,6 +1,6 @@
 name: Build
 
-on: [push]
+on: [ push ]
 
 jobs:
   build:
@@ -13,7 +13,7 @@ jobs:
       - name: Set up Deno
         uses: denoland/setup-deno@v1
         with:
-          deno-version: v1.46.1
+          deno-version: v2
 
       - name: Build project
         run: deno task build
