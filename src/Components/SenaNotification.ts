@@ -1,6 +1,6 @@
 import { html, LitElement } from 'lit'
-import { customElement } from 'lit/decorators'
-import { SenaEventsEmmiter } from '../utils/eventsEmiter.ts'
+import { customElement } from 'lit/decorators.js'
+import SenaEventsEmmiter from '../utils/eventsEmiter.ts'
 import { betterTimeout } from '../utils/timer.ts'
 
 @customElement('sena-notification')

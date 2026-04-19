@@ -1,8 +1,8 @@
 import { html, LitElement } from 'lit'
-import { customElement } from 'lit/decorators'
+import { customElement } from 'lit/decorators.js'
 import { AUDIOS, DEFAULT_SETTINGS_AUTOPLAY } from '../constant.ts'
 import { getStorageFiled, StorageKeys } from '../data/storage.ts'
-import { SenaEventsEmmiter } from '../utils/eventsEmiter.ts'
+import SenaEventsEmmiter from '../utils/eventsEmiter.ts'
 import { betterTimeout } from '../utils/timer.ts'
 
 @customElement('sena-sound-toggle')
@@ -12,11 +12,11 @@ export class SenaSoundToggle extends LitElement {
   private isFirstPlaySuccess = true
 
   private get bgmRef() {
-    return this.shadowRoot!.querySelector('#bgm') as HTMLAudioElement
+    return this.shadowRoot?.querySelector('#bgm') as HTMLAudioElement
   }
 
   private get soundButtonRef() {
-    return this.shadowRoot!.querySelector('#sound-toggle') as HTMLButtonElement
+    return this.shadowRoot?.querySelector('#sound-toggle') as HTMLButtonElement
   }
 
   private soundButtonRotate(rotate: number) {
@@ -38,7 +38,7 @@ export class SenaSoundToggle extends LitElement {
       })
       .catch(() => {
         this.pauseSound()
-        if (this.autoPlayFailed === undefined) this.autoPlayFailed = true
+        if (this.autoPlayFailed === void 0) this.autoPlayFailed = true
       })
   }
 

@@ -1,16 +1,17 @@
 import { html, LitElement } from 'lit'
-import { customElement } from 'lit/decorators'
+import { customElement } from 'lit/decorators.js'
 import { GITHUB_URL, LEAVE_MESSAGES_DOCS } from '../constant.ts'
-import { SenaState } from '../data/state.ts'
+import SenaState from '../data/state.ts'
 import type { Message } from '../types.ts'
-import { SenaEventsEmmiter } from '../utils/eventsEmiter.ts'
-import { I18n } from '../utils/i18n.ts'
+import SenaEventsEmmiter from '../utils/eventsEmiter.ts'
+import I18n from '../utils/i18n.ts'
 import './SenaTextBlock.ts'
 
 @customElement('sena-messages')
 export class SenaMessages extends LitElement {
   private static getMessage() {
-    return SenaState.messagesList[Math.floor(Math.random() * SenaState.messagesList.length)]
+    const messageList = SenaState.getMessageList()
+    return messageList[Math.floor(Math.random() * messageList.length)]
   }
 
   private message: Message = SenaMessages.getMessage()

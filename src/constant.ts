@@ -1,6 +1,6 @@
 import type { Metadata } from './types.ts'
 
-export const IS_PHONE = globalThis.window.innerWidth <= 960
+export const IS_PHONE = typeof globalThis.window === 'object' ? globalThis.window.innerWidth <= 960 : true
 
 export const DEFAULT_SETTINGS_AUTOPLAY = true
 

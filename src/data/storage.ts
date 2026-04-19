@@ -32,9 +32,7 @@ export function getStorageFiled<K extends StorageKeys, D extends GetStorageKeyVa
     }
     return result as D
   }
-  if (typeof defaultValue === 'boolean') {
-    return (value === 'true') as D
-  }
+  if (typeof defaultValue === 'boolean') return (value === 'true') as D
   if (['', 'null', 'undefined'].includes(value.trim())) {
     localStorage.setItem(key, String(defaultValue))
     return defaultValue

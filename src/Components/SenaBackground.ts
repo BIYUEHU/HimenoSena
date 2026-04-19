@@ -1,16 +1,15 @@
 import { html, LitElement } from 'lit'
-import { customElement } from 'lit/decorators'
 import { BACKGROUND_LIST, BRIGHT_BACKGROUND_LIST } from '../constant.ts'
-import { SenaState } from '../data/state.ts'
-import { SenaEventsEmmiter } from '../utils/eventsEmiter.ts'
+import SenaEventsEmmiter from '../utils/eventsEmiter.ts'
 import { nextTick, sleep } from '../utils/timer.ts'
 import './SenaTextBlock.ts'
+import { customElement } from 'lit/decorators.js'
 
 @customElement('sena-background')
 export class SenaBackground extends LitElement {
   private static getBackground() {
     const result = BACKGROUND_LIST[Math.floor(Math.random() * BACKGROUND_LIST.length)]
-    SenaState.isBrightBackground = BRIGHT_BACKGROUND_LIST.includes(result)
+    SenaEventsEmmiter.emit('adaptTextColor', BRIGHT_BACKGROUND_LIST.includes(result))
     return result
   }
 
@@ -26,10 +25,10 @@ export class SenaBackground extends LitElement {
     }
   }
 
-  private background = SenaBackground.getBackground()
+  private background: string = ''
 
   private get backgroundRef() {
-    return (this.shadowRoot!.querySelector('#bg') as HTMLImageElement)!
+    return this.shadowRoot?.querySelector('#bg') as HTMLImageElement
   }
 
   private async updateBackground() {
@@ -40,7 +39,6 @@ export class SenaBackground extends LitElement {
     await sleep(1500)
     this.background = SenaBackground.getBackground()
     ref.src = this.background
-    SenaEventsEmmiter.emit('adaptTextColor')
     this.requestUpdate()
 
     await sleep(100)
@@ -56,6 +54,8 @@ export class SenaBackground extends LitElement {
   }
 
   public override firstUpdated() {
+    this.background = SenaBackground.getBackground()
+    this.requestUpdate()
     nextTick(() => SenaBackground.preloadImages())
     const ref = this.backgroundRef
     ;['touchstart', 'contextmenu', 'touchmove'].map((eventName) =>

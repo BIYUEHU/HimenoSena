@@ -11,8 +11,6 @@ export function postView() {
     .catch((err) => error(`Failed to post view: ${err}`))
 }
 
-export function getMessagesList(): Promise<Message[]> {
-  return fetch('/messages.json')
-    .then((res) => res.json())
-    .catch((err) => error(`Failed to get messages: ${err}`))
+export function fetchMessageList(): Promise<Message[]> {
+  return fetch('/messages.json').then((res) => res.json())
 }

@@ -1,8 +1,7 @@
 import { html, LitElement } from 'lit'
-import { customElement } from 'lit/decorators'
+import { customElement } from 'lit/decorators.js'
 import { QUOTES_LIST } from '../constant.ts'
-import { SenaState } from '../data/state.ts'
-import { SenaEventsEmmiter } from '../utils/eventsEmiter.ts'
+import SenaEventsEmmiter from '../utils/eventsEmiter.ts'
 import { sleep } from '../utils/timer.ts'
 
 @customElement('sena-quotes')
@@ -18,7 +17,7 @@ export class SenaQuotes extends LitElement {
   private index: 0 | 1 = 0
 
   private updateQuote() {
-    this.currentQuote = undefined
+    this.currentQuote = void 0
     this.requestUpdate()
     sleep(800).then(() => {
       this.currentQuote = this.getQuote()
@@ -26,9 +25,10 @@ export class SenaQuotes extends LitElement {
     })
   }
 
-  private adaptTextColor() {
-    const ref = this.shadowRoot!.querySelector('.quote')!
-    if (SenaState.isBrightBackground) {
+  private adaptTextColor(isBrightBackground: boolean) {
+    const ref = this.shadowRoot?.querySelector('.quote')
+    if (!ref) return
+    if (isBrightBackground) {
       ref.classList.add('dark-color')
     } else {
       ref.classList.remove('dark-color')
@@ -37,13 +37,13 @@ export class SenaQuotes extends LitElement {
   }
 
   private onMouseEnter() {
-    if (this.currentQuote === undefined || !this.currentQuote[1]) return
+    if (this.currentQuote === void 0 || !this.currentQuote[1]) return
     this.index = 1
     this.requestUpdate()
   }
 
   private onMouseLeave() {
-    if (this.currentQuote === undefined) return
+    if (this.currentQuote === void 0) return
     this.index = 0
     this.requestUpdate()
   }
@@ -52,7 +52,7 @@ export class SenaQuotes extends LitElement {
     return html`
       <link rel="stylesheet" href="/styles.css">
       <div class="quote ${
-        this.currentQuote !== undefined ? 'visible' : ''
+        this.currentQuote !== void 0 ? 'visible' : ''
       }" @mouseenter=${this.onMouseEnter} @mouseleave=${this.onMouseLeave}>
           ${this.currentQuote?.[this.index]}
       </div>
@@ -60,8 +60,8 @@ export class SenaQuotes extends LitElement {
   }
 
   public override firstUpdated() {
-    this.adaptTextColor()
+    this.adaptTextColor(false)
     SenaEventsEmmiter.on('updateContent', () => this.updateQuote())
-    SenaEventsEmmiter.on('adaptTextColor', () => this.adaptTextColor())
+    SenaEventsEmmiter.on('adaptTextColor', (isBrightBackground) => this.adaptTextColor(isBrightBackground))
   }
 }

@@ -1,18 +1,18 @@
 import { html, LitElement } from 'lit'
-import { customElement } from 'lit/decorators'
+import { customElement } from 'lit/decorators.js'
 import { DEFAULT_SETTINGS_START_DATE, UNIQUE } from '../constant.ts'
-import { SenaState } from '../data/state.ts'
 import { getStorageFiled, StorageKeys } from '../data/storage.ts'
 import { daysSince } from '../utils/date.ts'
-import { SenaEventsEmmiter } from '../utils/eventsEmiter.ts'
-import { I18n } from '../utils/i18n.ts'
+import SenaEventsEmmiter from '../utils/eventsEmiter.ts'
+import I18n from '../utils/i18n.ts'
 import './SenaTextBlock.ts'
 
 @customElement('sena-title')
 export class SenaTitle extends LitElement {
-  private adaptTextColor() {
-    const ref = this.shadowRoot!.querySelector('.title')!
-    if (SenaState.isBrightBackground) {
+  private adaptTextColor(isBrightBackground: boolean) {
+    const ref = this.shadowRoot?.querySelector('.title')
+    if (!ref) return
+    if (isBrightBackground) {
       ref.classList.add('dark-color')
     } else {
       ref.classList.remove('dark-color')
@@ -23,7 +23,7 @@ export class SenaTitle extends LitElement {
   private readonly unique = ((fr) =>
     ((d) =>
       UNIQUE.reduce(
-        (acc, cur, index) => (index % 2 === 0 ? [...acc, [cur, UNIQUE[index + 1]] as [number, number]] : acc),
+        (acc, cur, index) => (index % 2 === 0 ? acc.concat([[cur, UNIQUE[index + 1]] as [number, number]]) : acc),
         [] as [number, number][]
       )
         .map(([c, i]) => [d(c), fr(i)] as [string, number])
@@ -44,7 +44,7 @@ export class SenaTitle extends LitElement {
   }
 
   public override firstUpdated() {
-    this.adaptTextColor()
-    SenaEventsEmmiter.on('adaptTextColor', () => this.adaptTextColor())
+    this.adaptTextColor(true)
+    SenaEventsEmmiter.on('adaptTextColor', (isBrightBackground) => this.adaptTextColor(isBrightBackground))
   }
 }

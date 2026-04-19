@@ -1,21 +1,22 @@
 import { html, LitElement } from 'lit'
-import { customElement } from 'lit/decorators'
+import { customElement } from 'lit/decorators.js'
 import { IS_PHONE, METADATA, REPO_URL } from '../constant.ts'
-import { SenaState } from '../data/state.ts'
-import { SenaEventsEmmiter } from '../utils/eventsEmiter.ts'
-import { I18n } from '../utils/i18n.ts'
+import SenaState from '../data/state.ts'
+import SenaEventsEmmiter from '../utils/eventsEmiter.ts'
+import I18n from '../utils/i18n.ts'
 import './SenaTextBlock.ts'
 
 @customElement('sena-info')
 export class SenaInfo extends LitElement {
   public override render() {
+    const messageList = SenaState.getMessageList()
     return html`
     <link rel="stylesheet" href="/styles.css">
     <sena-text-block>
       ${
         IS_PHONE
-          ? I18n.f`info.line1.phone`(METADATA.views, SenaState.messagesList.length)
-          : I18n.f`info.line1.pc`(METADATA.views, SenaState.messagesList.length)
+          ? I18n.f`info.line1.phone`(METADATA.views, messageList.length)
+          : I18n.f`info.line1.pc`(METADATA.views, messageList.length)
       }<br />
     ${IS_PHONE ? I18n.t`info.line2.phone` : I18n.t`info.line2.pc`}
     <br />

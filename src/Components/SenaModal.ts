@@ -1,22 +1,22 @@
 import { html, LitElement } from 'lit'
-import { customElement } from 'lit/decorators'
+import { customElement } from 'lit/decorators.js'
 import { DEFAULT_SETTINGS_AUTOPLAY, DEFAULT_SETTINGS_START_DATE, DEFAULT_SETTINGS_SWITCH_TIME } from '../constant.ts'
 import { getStorageFiled, StorageKeys, setStorageFiled } from '../data/storage.ts'
-import { SenaEventsEmmiter } from '../utils/eventsEmiter.ts'
-import { I18n } from '../utils/i18n.ts'
+import SenaEventsEmmiter from '../utils/eventsEmiter.ts'
+import I18n from '../utils/i18n.ts'
 import { betterTimeout } from '../utils/timer.ts'
 
 @customElement('sena-modal')
 export class SenaModal extends LitElement {
   private get modalRef() {
-    return this.shadowRoot!.querySelector('.modal') as HTMLDivElement
+    return this.shadowRoot?.querySelector('.modal') as HTMLDivElement
   }
 
   private getRef() {
     return [
-      this.shadowRoot!.querySelector('#time-input') as HTMLInputElement,
-      this.shadowRoot!.querySelector('#date-input') as HTMLInputElement,
-      this.shadowRoot!.querySelector('#autoplay-music') as HTMLInputElement
+      this.shadowRoot?.querySelector('#time-input') as HTMLInputElement,
+      this.shadowRoot?.querySelector('#date-input') as HTMLInputElement,
+      this.shadowRoot?.querySelector('#autoplay-music') as HTMLInputElement
     ]
   }
 
@@ -62,7 +62,7 @@ export class SenaModal extends LitElement {
     setStorageFiled(StorageKeys.SETTINGS_SWITCH_TIME, timeInt)
     setStorageFiled(StorageKeys.SETTINGS_START_DATE, date)
     setStorageFiled(StorageKeys.SETTINGS_AUTOPLAY, autoplay)
-    betterTimeout(() => window.location.reload(), 500)
+    betterTimeout(() => globalThis.window.location.reload(), 500)
   }
 
   public override firstUpdated() {

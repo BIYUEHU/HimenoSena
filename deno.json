@@ -6,8 +6,10 @@
     "build": "deno run --allow-read --allow-write --allow-run build.ts"
   },
   "imports": {
-    "lit": "https://esm.sh/lit",
-    "lit/decorators": "https://esm.sh/lit/decorators.js"
+    "@biomejs/biome": "npm:@biomejs/biome@^2.4.12",
+    "@lit-labs/ssr": "npm:@lit-labs/ssr@^4.0.0",
+    "@lit-labs/ssr-client": "npm:@lit-labs/ssr-client@^1.1.8",
+    "lit": "npm:lit@^3.3.2"
   },
   "compilerOptions": {
     "lib": [

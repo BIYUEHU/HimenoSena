@@ -4,7 +4,7 @@ import { betterTimeout } from './timer.ts'
 
 export interface EventsList {
   updateContent(): void
-  adaptTextColor(): void
+  adaptTextColor(isBrightBackground: boolean): void
   setModal(isOpen: boolean): void
   updateMessages(): void
   notify(message: string): void
@@ -14,21 +14,19 @@ type EventsListMapping = {
   [key in keyof EventsList]?: EventsList[key][]
 }
 
-export class SenaEventsEmmiter {
-  private static readonly events: EventsListMapping = {}
+const EVENTS: EventsListMapping = {}
 
-  public static on<E extends keyof EventsList>(event: E, listener: EventsList[E]) {
-    if (!SenaEventsEmmiter.events[event]) {
-      SenaEventsEmmiter.events[event] = [listener] as EventsListMapping[E]
-    } else {
-      SenaEventsEmmiter.events[event].push(listener)
-    }
+function on<E extends keyof EventsList>(event: E, listener: EventsList[E]) {
+  if (!EVENTS[event]) {
+    EVENTS[event] = [listener] as EventsListMapping[E]
+  } else {
+    EVENTS[event].push(listener)
   }
+}
 
-  public static emit<E extends keyof EventsList>(event: E, ...args: Parameters<EventsList[E]>) {
-    if (SenaEventsEmmiter.events[event]) {
-      SenaEventsEmmiter.events[event].map((listener) => (listener as () => void)(...(args as [])))
-    }
+function emit<E extends keyof EventsList>(event: E, ...args: Parameters<EventsList[E]>) {
+  if (EVENTS[event]) {
+    EVENTS[event].map((listener) => (listener as () => void)(...(args as [])))
   }
 }
 
@@ -38,8 +36,13 @@ export function eventsLooper() {
   betterTimeout(
     () => {
       eventsLooper()
-      SenaEventsEmmiter.emit('updateContent')
+      emit('updateContent')
     },
     switchTime * 1000 + 1500 + 100
   )
+}
+
+export default {
+  on,
+  emit
 }
