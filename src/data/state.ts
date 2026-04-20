@@ -1,8 +1,5 @@
 import { METADATA } from '../constant.ts'
-import { fetchMessageList, postView } from '../http/index.ts'
-import type { Message } from '../types.ts'
-import SenaEventsEmmiter from '../utils/eventsEmiter.ts'
-import { error } from '../utils/logger.ts'
+import { postView } from '../http/index.ts'
 import { betterTimeout } from '../utils/timer.ts'
 
 let activeTime = 0
@@ -22,31 +19,25 @@ function setActiveCounter() {
   return
 }
 
-let messageList: Message[] = [
-  {
-    msg: '传达之物，皆数传达；何曾无理由修成正果？铅华尽洗，磨难遍历；何曾无理由相信将是回忆过后的美好续篇？不觉间，娇妻久归，笑靥如花，我的世界唯有星空与你。',
-    user: 'BIYUEHU',
-    name: 'AS'
-  }
-]
+// const messageList: Message[] = []
 
-function initMessageList() {
-  fetchMessageList()
-    .then((res) => {
-      messageList = res
-      SenaEventsEmmiter.emit('updateMessages')
-    })
-    .catch((err) => {
-      error(`[Sena] Failed to fetch messages list: ${err instanceof Error ? err.message : err}`)
-    })
-}
+// function initMessageList() {
+//   fetchMessageList()
+//     .then((res) => {
+//       messageList.push(...res)
+//       SenaEventsEmmiter.emit('updateMessages')
+//     })
+//     .catch((err) => {
+//       error(`[Sena] Failed to fetch messages list: ${err instanceof Error ? err.message : err}`)
+//     })
+// }
 
-function getMessageList() {
-  return messageList
-}
+// function getMessageList() {
+//   return messageList
+// }
 
 export default {
-  setActiveCounter,
-  initMessageList,
-  getMessageList
+  setActiveCounter
+  // initMessageList,
+  // getMessageList
 }

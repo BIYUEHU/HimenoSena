@@ -1,25 +1,24 @@
 import { html, LitElement } from 'lit'
-import { customElement } from 'lit/decorators.js'
+import { customElement, state } from 'lit/decorators.js'
 import './SenaTextBlock.ts'
 
 @customElement('sena-about')
 export class SenaAbout extends LitElement {
-  private isHovering = false
+  @state()
+  private accessor isHovering = false
 
   private onMouseEnter() {
     this.isHovering = true
-    this.requestUpdate()
   }
 
   private onMouseLeave() {
     this.isHovering = false
-    this.requestUpdate()
   }
 
   public override render() {
     return html`
     <link rel="stylesheet" href="/styles.css">
-    <sena-text-block title="About" @mouseenter=${this.onMouseEnter} @mouseleave=${this.onMouseLeave}>${
+    <sena-text-block head="About" @mouseenter=${this.onMouseEnter} @mouseleave=${this.onMouseLeave}>${
       this.isHovering
         ? html`Us:track 旗下游戏 <a href="http://ustrack.amusecraft.com/koikake/" target="_blank">「恋×シンアイ彼女」</a> 唯一女主。<br /><br />
     总是在身边软绵绵的她就是最容易攻略的那一个女主角。<br />

@@ -1,27 +1,25 @@
 import { html, LitElement } from 'lit'
-import { customElement } from 'lit/decorators.js'
-import { GITHUB_URL, LEAVE_MESSAGES_DOCS } from '../constant.ts'
-import SenaState from '../data/state.ts'
+import { customElement, property, state } from 'lit/decorators.js'
+import { DEFAULT_MESSAGE_LIST, GITHUB_URL, LEAVE_MESSAGES_DOCS } from '../constant.ts'
 import type { Message } from '../types.ts'
-import SenaEventsEmmiter from '../utils/eventsEmiter.ts'
 import I18n from '../utils/i18n.ts'
 import './SenaTextBlock.ts'
+import { SenaError } from '../utils/error.ts'
 
 @customElement('sena-messages')
 export class SenaMessages extends LitElement {
-  private static getMessage() {
-    const messageList = SenaState.getMessageList()
-    return messageList[Math.floor(Math.random() * messageList.length)]
-  }
+  @property({ type: Array })
+  private accessor messages!: Message[]
 
-  private message: Message = SenaMessages.getMessage()
+  @state()
+  private accessor message: Message = DEFAULT_MESSAGE_LIST[0]
 
   private refreshMessage() {
-    this.message = SenaMessages.getMessage()
-    this.requestUpdate()
+    this.message = this.messages[Math.floor(Math.random() * this.messages.length)] ?? DEFAULT_MESSAGE_LIST[0]
   }
 
   public override render() {
+    if (!this.messages) throw new SenaError('sena-messages component: messages property is required')
     return html`
     <link rel="stylesheet" href="/styles.css">
     <sena-text-block title="Messages">
@@ -32,6 +30,6 @@ export class SenaMessages extends LitElement {
   }
 
   public override firstUpdated() {
-    SenaEventsEmmiter.on('updateMessages', () => this.refreshMessage())
+    this.refreshMessage()
   }
 }

@@ -2,7 +2,6 @@ import { html, LitElement } from 'lit'
 import { customElement } from 'lit/decorators.js'
 import { DEFAULT_SETTINGS_AUTOPLAY, DEFAULT_SETTINGS_START_DATE, DEFAULT_SETTINGS_SWITCH_TIME } from '../constant.ts'
 import { getStorageFiled, StorageKeys, setStorageFiled } from '../data/storage.ts'
-import SenaEventsEmmiter from '../utils/eventsEmiter.ts'
 import I18n from '../utils/i18n.ts'
 import { betterTimeout } from '../utils/timer.ts'
 
@@ -70,6 +69,5 @@ export class SenaModal extends LitElement {
     time.value = getStorageFiled(StorageKeys.SETTINGS_SWITCH_TIME, DEFAULT_SETTINGS_SWITCH_TIME).toString()
     date.value = getStorageFiled(StorageKeys.SETTINGS_START_DATE, DEFAULT_SETTINGS_START_DATE)
     autoplay.checked = getStorageFiled(StorageKeys.SETTINGS_AUTOPLAY, DEFAULT_SETTINGS_AUTOPLAY)
-    SenaEventsEmmiter.on('setModal', (isOpen: boolean) => (isOpen ? this.openModal() : this.closeModal()))
   }
 }

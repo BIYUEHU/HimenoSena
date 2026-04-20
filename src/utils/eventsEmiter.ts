@@ -5,8 +5,7 @@ import { betterTimeout } from './timer.ts'
 export interface EventsList {
   updateContent(): void
   adaptTextColor(isBrightBackground: boolean): void
-  setModal(isOpen: boolean): void
-  updateMessages(): void
+  // updateMessages(): void
   notify(message: string): void
 }
 

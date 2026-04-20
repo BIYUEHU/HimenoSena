@@ -1,5 +1,5 @@
 import { html, LitElement } from 'lit'
-import { customElement } from 'lit/decorators.js'
+import { customElement, state } from 'lit/decorators.js'
 import { QUOTES_LIST } from '../constant.ts'
 import SenaEventsEmmiter from '../utils/eventsEmiter.ts'
 import { sleep } from '../utils/timer.ts'
@@ -12,16 +12,15 @@ export class SenaQuotes extends LitElement {
     return prevQuote && prevQuote[0] === result[0] ? this.getQuote() : result
   }
 
-  private currentQuote? = this.getQuote()
+  @state()
+  private accessor currentQuote: [string, string?] | null = null
 
-  private index: 0 | 1 = 0
+  @state()
+  private accessor index: 0 | 1 = 0
 
   private updateQuote() {
-    this.currentQuote = void 0
-    this.requestUpdate()
     sleep(800).then(() => {
       this.currentQuote = this.getQuote()
-      this.requestUpdate()
     })
   }
 
@@ -37,15 +36,13 @@ export class SenaQuotes extends LitElement {
   }
 
   private onMouseEnter() {
-    if (this.currentQuote === void 0 || !this.currentQuote[1]) return
+    if (this.currentQuote === null || !this.currentQuote[1]) return
     this.index = 1
-    this.requestUpdate()
   }
 
   private onMouseLeave() {
     if (this.currentQuote === void 0) return
     this.index = 0
-    this.requestUpdate()
   }
 
   public override render() {
@@ -60,6 +57,7 @@ export class SenaQuotes extends LitElement {
   }
 
   public override firstUpdated() {
+    this.currentQuote = this.getQuote()
     this.adaptTextColor(false)
     SenaEventsEmmiter.on('updateContent', () => this.updateQuote())
     SenaEventsEmmiter.on('adaptTextColor', (isBrightBackground) => this.adaptTextColor(isBrightBackground))

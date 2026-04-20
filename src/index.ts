@@ -13,9 +13,6 @@ function main() {
 
   /* Set active counter */
   SenaState.setActiveCounter()
-
-  /* Fetch data */
-  SenaState.initMessageList()
 }
 
 export function bootstrap(key: string): Promise<void> {

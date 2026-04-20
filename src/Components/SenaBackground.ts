@@ -3,7 +3,7 @@ import { BACKGROUND_LIST, BRIGHT_BACKGROUND_LIST } from '../constant.ts'
 import SenaEventsEmmiter from '../utils/eventsEmiter.ts'
 import { nextTick, sleep } from '../utils/timer.ts'
 import './SenaTextBlock.ts'
-import { customElement } from 'lit/decorators.js'
+import { customElement, state } from 'lit/decorators.js'
 
 @customElement('sena-background')
 export class SenaBackground extends LitElement {
@@ -25,7 +25,8 @@ export class SenaBackground extends LitElement {
     }
   }
 
-  private background: string = ''
+  @state()
+  private accessor background: string = ''
 
   private get backgroundRef() {
     return this.shadowRoot?.querySelector('#bg') as HTMLImageElement
@@ -55,7 +56,6 @@ export class SenaBackground extends LitElement {
 
   public override firstUpdated() {
     this.background = SenaBackground.getBackground()
-    this.requestUpdate()
     nextTick(() => SenaBackground.preloadImages())
     const ref = this.backgroundRef
     ;['touchstart', 'contextmenu', 'touchmove'].map((eventName) =>

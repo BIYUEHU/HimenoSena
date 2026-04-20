@@ -1,11 +1,12 @@
 import { html, LitElement } from 'lit'
-import { customElement } from 'lit/decorators.js'
+import { customElement, state } from 'lit/decorators.js'
 import SenaEventsEmmiter from '../utils/eventsEmiter.ts'
 import { betterTimeout } from '../utils/timer.ts'
 
 @customElement('sena-notification')
 export class SenaNotification extends LitElement {
-  private content = ''
+  @state()
+  private accessor content = ''
 
   public override render() {
     return this.content
@@ -18,10 +19,8 @@ export class SenaNotification extends LitElement {
   public override firstUpdated() {
     SenaEventsEmmiter.on('notify', (message) => {
       this.content = message
-      this.requestUpdate()
       betterTimeout(() => {
         this.content = ''
-        this.requestUpdate()
       }, 5 * 1000)
     })
   }

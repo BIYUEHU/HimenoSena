@@ -7,6 +7,7 @@ import { betterTimeout } from '../utils/timer.ts'
 
 @customElement('sena-sound-toggle')
 export class SenaSoundToggle extends LitElement {
+  // TODO:
   private readonly audioIndex = Math.floor(Math.random() * AUDIOS.length)
 
   private isFirstPlaySuccess = true
