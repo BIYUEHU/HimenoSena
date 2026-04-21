@@ -1,6 +1,6 @@
 import { html, LitElement } from 'lit'
 import { customElement, state } from 'lit/decorators.js'
-import { IS_PHONE } from '../constant.ts'
+import SenaState from '../data/state.ts'
 import I18n from '../utils/i18n.ts'
 
 @customElement('sena-details')
@@ -12,6 +12,9 @@ export class SenaDetails extends LitElement {
     [I18n.t`details.line3.front`, I18n.t`details.line3.back`, false],
     [I18n.t`details.line4.front`, I18n.t`details.line4.back`, false]
   ]
+
+  @state()
+  private accessor isPhone = true
 
   private onMouseEnterFactory(index: number) {
     return () => {
@@ -25,8 +28,9 @@ export class SenaDetails extends LitElement {
     }
   }
 
+  // TODO: fix this
   public override render() {
-    return IS_PHONE
+    return this.isPhone
       ? ''
       : html`
       <link rel="stylesheet" href="/styles.css">
@@ -39,5 +43,9 @@ export class SenaDetails extends LitElement {
       )}
       </div>
     `
+  }
+
+  public override firstUpdated() {
+    this.isPhone = SenaState.isPhone()
   }
 }

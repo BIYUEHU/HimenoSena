@@ -12,6 +12,7 @@ import './SenaNotification.ts'
 import { state } from 'lit/decorators.js'
 import { fetchMessageList } from '../http/index.ts'
 import type { Message } from '../types.ts'
+import { showCatchedError } from '../utils/error.ts'
 import SenaEventsEmmiter from '../utils/eventsEmiter.ts'
 import { error } from '../utils/logger.ts'
 
@@ -45,8 +46,8 @@ export class SenaComponent extends LitElement {
         this.messages.push(...res)
       })
       .catch((err) => {
-        SenaEventsEmmiter.emit('notify', 'Error: failed to fetch message list, please check your network connection')
-        error(`[Sena] Failed to fetch message list: ${err instanceof Error ? err.message : err}`)
+        SenaEventsEmmiter.emit('notify', 'Failed to fetch message list, please check your network connection')
+        error(`Failed to fetch message list: ${showCatchedError(err)}`)
       })
   }
 }

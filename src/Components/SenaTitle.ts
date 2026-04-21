@@ -34,7 +34,7 @@ export class SenaTitle extends LitElement {
   public override render() {
     return html`
     <link rel="stylesheet" href="/styles.css">
-    <div class="title">
+    <div class="title dark-color">
       <div>${this.unique}</div>
       <div>${I18n.f`title.day`(
         daysSince(getStorageFiled(StorageKeys.SETTINGS_START_DATE, DEFAULT_SETTINGS_START_DATE)) ?? 1
@@ -44,7 +44,6 @@ export class SenaTitle extends LitElement {
   }
 
   public override firstUpdated() {
-    this.adaptTextColor(true)
     SenaEventsEmmiter.on('adaptTextColor', (isBrightBackground) => this.adaptTextColor(isBrightBackground))
   }
 }

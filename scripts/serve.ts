@@ -1,24 +1,5 @@
 const clients: WebSocket[] = []
 
-function getContentType(path: string) {
-  return (
-    [
-      ['html', 'text/html'],
-      ['js', 'application/javascript'],
-      ['css', 'text/css'],
-      ['txt', 'text/plain'],
-      ['png', 'image/png'],
-      ['jpg', 'image/jpeg'],
-      ['jpeg', 'image/jpeg'],
-      ['gif', 'image/gif'],
-      ['svg', 'image/svg+xml'],
-      ['ico', 'image/x-icon'],
-      ['json', 'application/json'],
-      ['mp3', 'audio/mpeg']
-    ].find(([ext]) => path.endsWith(`.${ext}`))?.[1] ?? 'text/plain'
-  )
-}
-
 async function watchFiles() {
   let lastChanged = 0
 
@@ -43,7 +24,21 @@ function handleWebSocket(req: Request) {
 }
 
 function handleStatic(filePath: string) {
-  const contentType = getContentType(filePath)
+  const contentType =
+    [
+      ['html', 'text/html'],
+      ['js', 'application/javascript'],
+      ['css', 'text/css'],
+      ['txt', 'text/plain'],
+      ['png', 'image/png'],
+      ['jpg', 'image/jpeg'],
+      ['jpeg', 'image/jpeg'],
+      ['gif', 'image/gif'],
+      ['svg', 'image/svg+xml'],
+      ['ico', 'image/x-icon'],
+      ['json', 'application/json'],
+      ['mp3', 'audio/mpeg']
+    ].find(([ext]) => filePath.endsWith(`.${ext}`))?.[1] ?? 'text/plain'
   try {
     const file = Deno.readFileSync(filePath)
     return new Response(
@@ -65,10 +60,9 @@ function handleStatic(filePath: string) {
 async function handleBundled() {
   return new Response(
     new TextDecoder().decode(
-      //! fix: building problem in dev mode
       (
         await new Deno.Command(Deno.execPath(), {
-          args: ['bundle', 'src/main.ts']
+          args: ['bundle', '--platform', 'browser', 'src/main.ts']
         }).output()
       ).stdout
     ),
@@ -78,6 +72,7 @@ async function handleBundled() {
     }
   )
 }
+
 watchFiles()
 
 async function fetch(req: Request) {

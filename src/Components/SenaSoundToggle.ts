@@ -1,5 +1,5 @@
 import { html, LitElement } from 'lit'
-import { customElement } from 'lit/decorators.js'
+import { customElement, state } from 'lit/decorators.js'
 import { AUDIOS, DEFAULT_SETTINGS_AUTOPLAY } from '../constant.ts'
 import { getStorageFiled, StorageKeys } from '../data/storage.ts'
 import SenaEventsEmmiter from '../utils/eventsEmiter.ts'
@@ -7,10 +7,11 @@ import { betterTimeout } from '../utils/timer.ts'
 
 @customElement('sena-sound-toggle')
 export class SenaSoundToggle extends LitElement {
-  // TODO:
-  private readonly audioIndex = Math.floor(Math.random() * AUDIOS.length)
+  @state()
+  private accessor audioIndex = Math.floor(Math.random() * AUDIOS.length)
 
   private isFirstPlaySuccess = true
+  private autoPlayFailed?: boolean
 
   private get bgmRef() {
     return this.shadowRoot?.querySelector('#bgm') as HTMLAudioElement
@@ -23,6 +24,20 @@ export class SenaSoundToggle extends LitElement {
   private soundButtonRotate(rotate: number) {
     this.soundButtonRef.style.transform = `rotate(${rotate}deg)`
     betterTimeout(() => this.soundButtonRotate(this.soundButtonRef.textContent === '🔇' ? rotate : rotate + 10), 200)
+  }
+
+  private nextRandomIndex(): number {
+    const next = Math.floor(Math.random() * AUDIOS.length)
+    return next === this.audioIndex ? this.nextRandomIndex() : next
+  }
+
+  private playNext() {
+    this.audioIndex = this.nextRandomIndex()
+    // 等 Lit 更新 src 后再播
+    this.updateComplete.then(() => {
+      this.bgmRef.load()
+      this.palySound()
+    })
   }
 
   private palySound() {
@@ -52,12 +67,10 @@ export class SenaSoundToggle extends LitElement {
     this.bgmRef.paused ? this.palySound() : this.pauseSound()
   }
 
-  private autoPlayFailed?: boolean
-
   public override render() {
     return html`
     <link rel="stylesheet" href="/styles.css">
-    <audio id="bgm" loop>
+    <audio id="bgm">
       <source src="/assets/${this.audioIndex + 1}.mp3" type="audio/mp3">
     </audio>
     <button class="fixed-button-common" id="sound-toggle" @click=${this.toggleSound}>🎵</button>
@@ -66,6 +79,10 @@ export class SenaSoundToggle extends LitElement {
 
   public override firstUpdated() {
     this.soundButtonRotate(0)
+
+    // 播完自动切下一首
+    this.bgmRef.addEventListener('ended', () => this.playNext())
+
     if (getStorageFiled(StorageKeys.SETTINGS_AUTOPLAY, DEFAULT_SETTINGS_AUTOPLAY)) {
       this.palySound()
       ;(['touchstart', 'click'] as const).map((eventName) =>

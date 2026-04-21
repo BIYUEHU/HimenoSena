@@ -2,8 +2,8 @@
   "name": "@himeno/sena",
   "exports": {},
   "tasks": {
-    "dev": "deno serve --host 0.0.0.0 --allow-net --allow-read --allow-write --allow-run server.ts",
-    "build": "deno run --allow-read --allow-write --allow-run build.ts"
+    "dev": "deno serve --host 0.0.0.0 --allow-net --allow-read --allow-write --allow-run scripts/serve.ts",
+    "build": "deno run --allow-read --allow-write --allow-run scripts/build.ts"
   },
   "imports": {
     "@biomejs/biome": "npm:@biomejs/biome@^2.4.12",

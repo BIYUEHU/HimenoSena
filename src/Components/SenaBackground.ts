@@ -7,8 +7,9 @@ import { customElement, state } from 'lit/decorators.js'
 
 @customElement('sena-background')
 export class SenaBackground extends LitElement {
-  private static getBackground() {
-    const result = BACKGROUND_LIST[Math.floor(Math.random() * BACKGROUND_LIST.length)]
+  private static getBackground(fixed = false) {
+    const result =
+      BACKGROUND_LIST[fixed ? BACKGROUND_LIST.length - 1 : Math.floor(Math.random() * BACKGROUND_LIST.length)]
     SenaEventsEmmiter.emit('adaptTextColor', BRIGHT_BACKGROUND_LIST.includes(result))
     return result
   }
@@ -26,7 +27,7 @@ export class SenaBackground extends LitElement {
   }
 
   @state()
-  private accessor background: string = ''
+  private accessor background: string = SenaBackground.getBackground(true)
 
   private get backgroundRef() {
     return this.shadowRoot?.querySelector('#bg') as HTMLImageElement
@@ -55,7 +56,7 @@ export class SenaBackground extends LitElement {
   }
 
   public override firstUpdated() {
-    this.background = SenaBackground.getBackground()
+    nextTick(() => (this.background = SenaBackground.getBackground()))
     nextTick(() => SenaBackground.preloadImages())
     const ref = this.backgroundRef
     ;['touchstart', 'contextmenu', 'touchmove'].map((eventName) =>

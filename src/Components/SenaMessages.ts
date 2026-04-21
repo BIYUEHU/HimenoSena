@@ -1,6 +1,6 @@
 import { html, LitElement } from 'lit'
 import { customElement, property, state } from 'lit/decorators.js'
-import { DEFAULT_MESSAGE_LIST, GITHUB_URL, LEAVE_MESSAGES_DOCS } from '../constant.ts'
+import { DEFAULT_MESSAGE, GITHUB_URL, LEAVE_MESSAGES_DOCS } from '../constant.ts'
 import type { Message } from '../types.ts'
 import I18n from '../utils/i18n.ts'
 import './SenaTextBlock.ts'
@@ -12,10 +12,10 @@ export class SenaMessages extends LitElement {
   private accessor messages!: Message[]
 
   @state()
-  private accessor message: Message = DEFAULT_MESSAGE_LIST[0]
+  private accessor message: Message = DEFAULT_MESSAGE
 
   private refreshMessage() {
-    this.message = this.messages[Math.floor(Math.random() * this.messages.length)] ?? DEFAULT_MESSAGE_LIST[0]
+    this.message = this.messages[Math.floor(Math.random() * this.messages.length)] ?? DEFAULT_MESSAGE
   }
 
   public override render() {

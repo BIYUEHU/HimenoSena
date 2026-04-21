@@ -31,7 +31,7 @@ Please refer to the article [我做了一个姬野星奏的专属网站](/docs/a
 ## Announcement and thanks
 
 - The background image is from the official CG.
-- The background music is `flower -piano arrangement-` by [水月陵](https://x.com/kiyo_mizutsuki).
+- The background music is `flower -piano arrangement-` by [水月陵](https://x.com/kiyo_mizutsuki). <!-- TODO: update here -->
 - Thanks to [火神80](https://github.com/huoshen80) for providing the server.
 
 ## License
