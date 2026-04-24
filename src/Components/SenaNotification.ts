@@ -11,7 +11,7 @@ export class SenaNotification extends LitElement {
   public override render() {
     return this.content
       ? html`
-      <link rel="stylesheet" href="/styles.css">
+      <link rel="stylesheet" href="./styles.css">
       <div class="notification show">${this.content}</div>`
       : html``
   }
@@ -25,3 +25,6 @@ export class SenaNotification extends LitElement {
     })
   }
 }
+
+
+

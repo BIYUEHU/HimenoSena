@@ -33,7 +33,7 @@ export class SenaDetails extends LitElement {
     return this.isPhone
       ? ''
       : html`
-      <link rel="stylesheet" href="/styles.css">
+      <link rel="stylesheet" href="./styles.css">
       <div class="details">
       ${this.details.map(
         ([front, back, isHovering], index) =>
@@ -49,3 +49,6 @@ export class SenaDetails extends LitElement {
     this.isPhone = SenaState.isPhone()
   }
 }
+
+
+

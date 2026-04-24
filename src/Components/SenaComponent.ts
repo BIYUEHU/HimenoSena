@@ -22,7 +22,7 @@ export class SenaComponent extends LitElement {
 
   public override render() {
     return html`
-    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="./styles.css">
     <sena-background></sena-background>
     <div class="container">
       <sena-title></sena-title>
@@ -51,3 +51,6 @@ export class SenaComponent extends LitElement {
       })
   }
 }
+
+
+

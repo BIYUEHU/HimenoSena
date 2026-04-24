@@ -8,7 +8,7 @@ export class SenaTextBlock extends LitElement {
 
   public override render() {
     return html`
-      <link rel="stylesheet" href="/styles.css">
+      <link rel="stylesheet" href="./styles.css">
       <div class="text-block">
         ${this.head ? html`<h2>${this.head}</h2>` : ''}
         <div><slot /></div>
@@ -16,3 +16,6 @@ export class SenaTextBlock extends LitElement {
     `
   }
 }
+
+
+

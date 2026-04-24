@@ -50,7 +50,7 @@ export class SenaBackground extends LitElement {
 
   public override render() {
     return html`
-    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="./styles.css">
     <img id="bg" src="${this.background}" alt="Background Image">
     `
   }
@@ -65,3 +65,6 @@ export class SenaBackground extends LitElement {
     SenaEventsEmmiter.on('updateContent', () => this.updateBackground())
   }
 }
+
+
+

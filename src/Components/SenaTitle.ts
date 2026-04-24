@@ -33,7 +33,7 @@ export class SenaTitle extends LitElement {
 
   public override render() {
     return html`
-    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="./styles.css">
     <div class="title dark-color">
       <div>${this.unique}</div>
       <div>${I18n.f`title.day`(
@@ -47,3 +47,6 @@ export class SenaTitle extends LitElement {
     SenaEventsEmmiter.on('adaptTextColor', (isBrightBackground) => this.adaptTextColor(isBrightBackground))
   }
 }
+
+
+

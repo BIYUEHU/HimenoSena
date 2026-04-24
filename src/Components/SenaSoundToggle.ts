@@ -69,9 +69,9 @@ export class SenaSoundToggle extends LitElement {
 
   public override render() {
     return html`
-    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="./styles.css">
     <audio id="bgm">
-      <source src="/assets/${this.audioIndex + 1}.mp3" type="audio/mp3">
+      <source src="./assets/${this.audioIndex + 1}.mp3" type="audio/mp3">
     </audio>
     <button class="fixed-button-common" id="sound-toggle" @click=${this.toggleSound}>🎵</button>
     `
@@ -95,3 +95,6 @@ export class SenaSoundToggle extends LitElement {
     }
   }
 }
+
+
+

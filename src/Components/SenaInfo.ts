@@ -21,7 +21,7 @@ export class SenaInfo extends LitElement {
   public override render() {
     if (!this.messages) throw new SenaError('sena-info component: messages property is required')
     return html`
-    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="./styles.css">
     <sena-text-block>
       ${
         this.isPhone
@@ -39,3 +39,6 @@ export class SenaInfo extends LitElement {
     this.isPhone = SenaState.isPhone()
   }
 }
+
+
+
