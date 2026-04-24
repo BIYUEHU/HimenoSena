@@ -1,15 +1,16 @@
 import { html, LitElement } from 'lit'
-import { customElement, property, state } from 'lit/decorators.js'
+import { customElement, state } from 'lit/decorators.js'
 import { DEFAULT_MESSAGE, GITHUB_URL, LEAVE_MESSAGES_DOCS } from '../constant.ts'
 import type { Message } from '../types.ts'
 import I18n from '../utils/i18n.ts'
 import './SenaTextBlock.ts'
+
 import { SenaError } from '../utils/error.ts'
+import SenaEventsEmmiter from '../utils/eventsEmiter.ts'
 
 @customElement('sena-messages')
 export class SenaMessages extends LitElement {
-  @property({ type: Array })
-  private accessor messages!: Message[]
+  private readonly messages: Message[] = []
 
   @state()
   private accessor message: Message = DEFAULT_MESSAGE
@@ -30,6 +31,9 @@ export class SenaMessages extends LitElement {
   }
 
   public override firstUpdated() {
-    this.refreshMessage()
+    SenaEventsEmmiter.on('loadedMessages', (messages) => {
+      this.messages.push(...messages)
+      this.refreshMessage()
+    })
   }
 }

@@ -323,3 +323,21 @@ a {
   font-weight: bold;
   margin-left: 0.5rem;
 }
+
+.desktop-only {
+  display: block;
+}
+
+.phone-only {
+  display: none;
+}
+
+@media (max-width: 960px) {
+  .desktop-only {
+    display: none;
+  }
+
+  .phone-only {
+    display: block;
+  }
+}
