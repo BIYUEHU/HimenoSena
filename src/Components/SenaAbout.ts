@@ -17,7 +17,7 @@ export class SenaAbout extends LitElement {
 
   public override render() {
     return html`
-    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="./styles.css">
     <sena-text-block head="About" @mouseenter=${this.onMouseEnter} @mouseleave=${this.onMouseLeave}>${
       this.isHovering
         ? html`Us:track 旗下游戏 <a href="http://ustrack.amusecraft.com/koikake/" target="_blank">「恋×シンアイ彼女」</a> 唯一女主。<br /><br />
@@ -35,3 +35,6 @@ export class SenaAbout extends LitElement {
     `
   }
 }
+
+
+

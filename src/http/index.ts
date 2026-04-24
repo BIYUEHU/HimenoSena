@@ -7,7 +7,7 @@ export async function getViews(): Promise<number> {
   if (!('isPhpEnv' in globalThis)) return 0
   return (
     (
-      await fetch('/views.php').catch((err) => {
+      await fetch('./views.php').catch((err) => {
         const content = `Failed to get views: ${showCatchedError(err)}`
         error(content)
         SenaEventsEmmiter.emit('notify', content)
@@ -24,7 +24,7 @@ export async function getViews(): Promise<number> {
 
 export async function postView() {
   if (!('isPhpEnv' in globalThis)) return
-  await fetch('/view.php', { method: 'POST' }).catch((err) => {
+  await fetch('./view.php', { method: 'POST' }).catch((err) => {
     const content = `Failed to post view: ${showCatchedError(err)}`
     error(content)
     SenaEventsEmmiter.emit('notify', content)

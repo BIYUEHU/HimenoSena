@@ -21,7 +21,7 @@ export class SenaModal extends LitElement {
 
   public override render() {
     return html`
-    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="./styles.css">
     <button class="fixed-button-common modal-open" @click=${this.openModal}>⚙</button>
     ${html`
     <div class="modal">
@@ -71,3 +71,6 @@ export class SenaModal extends LitElement {
     autoplay.checked = getStorageFiled(StorageKeys.SETTINGS_AUTOPLAY, DEFAULT_SETTINGS_AUTOPLAY)
   }
 }
+
+
+

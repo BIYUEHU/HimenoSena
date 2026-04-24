@@ -47,7 +47,7 @@ export class SenaQuotes extends LitElement {
 
   public override render() {
     return html`
-      <link rel="stylesheet" href="/styles.css">
+      <link rel="stylesheet" href="./styles.css">
       <div class="quote dark-color ${
         this.currentQuote !== void 0 ? 'visible' : ''
       }" @mouseenter=${this.onMouseEnter} @mouseleave=${this.onMouseLeave}>
@@ -62,3 +62,6 @@ export class SenaQuotes extends LitElement {
     SenaEventsEmmiter.on('adaptTextColor', (isBrightBackground) => this.adaptTextColor(isBrightBackground))
   }
 }
+
+
+

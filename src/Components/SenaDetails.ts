@@ -39,3 +39,6 @@ export class SenaDetails extends LitElement {
     `
   }
 }
+
+
+

@@ -18,6 +18,7 @@
     ],
     "module": "esnext",
     "moduleResolution": "bundler",
-    "strict": true
+    "strict": true,
+    "experimentalDecorators": false
   }
 }

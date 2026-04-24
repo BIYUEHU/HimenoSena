@@ -22,7 +22,7 @@ export class SenaMessages extends LitElement {
   public override render() {
     if (!this.messages) throw new SenaError('sena-messages component: messages property is required')
     return html`
-    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="./styles.css">
     <sena-text-block title="Messages">
       <p class="messages" @click="${this.refreshMessage}">${this.message.msg}——By <a href="${GITHUB_URL}/${this.message.user}" target="_blank">${this.message.name}</a></p>
       <a href="${LEAVE_MESSAGES_DOCS}" target="_blank">${I18n.t`messages.button`}</a>
@@ -37,3 +37,6 @@ export class SenaMessages extends LitElement {
     })
   }
 }
+
+
+

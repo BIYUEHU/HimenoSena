@@ -16,7 +16,7 @@ export class SenaInfo extends LitElement {
 
   public override render() {
     return html`
-    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="./styles.css">
     <sena-text-block>
       <div class="phone-only">
         ${I18n.f`info.line1.phone`(this.views, this.messagesCount)}<br />
@@ -40,3 +40,6 @@ export class SenaInfo extends LitElement {
     })
   }
 }
+
+
+
