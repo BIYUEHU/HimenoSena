@@ -3,8 +3,8 @@ import { showCatchedError } from '../utils/error.ts'
 import SenaEventsEmmiter from '../utils/eventsEmiter.ts'
 import { error } from '../utils/logger.ts'
 
-export async function getViews(): Promise<string> {
-  if (!('isPhpEnv' in globalThis)) return '0'
+export async function getViews(): Promise<number> {
+  if (!('isPhpEnv' in globalThis)) return 0
   return (
     (
       await fetch('./views.php').catch((err) => {
@@ -12,7 +12,13 @@ export async function getViews(): Promise<string> {
         error(content)
         SenaEventsEmmiter.emit('notify', content)
       })
-    )?.text() || '0'
+    )
+      ?.text()
+      .then((value) => {
+        const num = Number.parseInt(value, 10)
+        if (!Number.isNaN(num)) return num
+        throw new Error()
+      }) || 0
   )
 }
 
@@ -26,5 +32,5 @@ export async function postView() {
 }
 
 export function fetchMessageList(): Promise<Message[]> {
-  return fetch('./messages.json').then((res) => res.json())
+  return fetch('https://cdn.jsdelivr.net/gh/biyuehu/himenosena/public/messages.json').then((res) => res.json())
 }

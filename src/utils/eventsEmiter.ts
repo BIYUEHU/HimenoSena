@@ -1,11 +1,12 @@
 import { DEFAULT_SETTINGS_SWITCH_TIME } from '../constant.ts'
 import { getStorageFiled, StorageKeys } from '../data/storage.ts'
+import type { Message } from '../types.ts'
 import { betterTimeout } from './timer.ts'
 
 export interface EventsList {
   updateContent(): void
   adaptTextColor(isBrightBackground: boolean): void
-  // updateMessages(): void
+  loadedMessages(messages: Message[]): void
   notify(message: string): void
 }
 
