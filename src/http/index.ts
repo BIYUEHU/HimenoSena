@@ -1,6 +1,6 @@
 import type { Message } from "../types.ts";
 
-const VIEW_API_URL = "https://hotaru.icu/api/utils/view/himeno-sena";
+const VIEW_API_URL = "https://i.arimuraromi.com/api/utils/view/himeno-sena";
 
 export function getViews(): Promise<number> {
   if (!("HIMENO_SENA_BUILD_TIME" in globalThis)) return Promise.resolve(0);

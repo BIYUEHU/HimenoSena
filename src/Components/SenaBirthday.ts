@@ -5,7 +5,7 @@ import SenaEventsEmmiter from '../utils/eventsEmiter.ts'
 
 @customElement('sena-birthday')
 export class SenaBirthday extends LitElement {
-  private readonly isBirthday = isHimenoSenaBirthday()
+  private isBirthday = false
 
   private previousTitle = ''
 
@@ -38,10 +38,6 @@ export class SenaBirthday extends LitElement {
 
   public override connectedCallback() {
     super.connectedCallback()
-    if (!this.isBirthday || typeof document === 'undefined') return
-    this.previousTitle = document.title
-    document.documentElement.classList.add('birthday-mode')
-    document.title = 'Happy Birthday, Himeno Sena!'
   }
 
   public override disconnectedCallback() {
@@ -52,7 +48,15 @@ export class SenaBirthday extends LitElement {
   }
 
   public override firstUpdated() {
+    if (typeof document === 'undefined') return
+    this.isBirthday = isHimenoSenaBirthday()
     if (!this.isBirthday) return
+    this.previousTitle = document.title
+    document.documentElement.classList.add('birthday-mode')
+    document.title = 'Happy Birthday, Himeno Sena!'
     SenaEventsEmmiter.emit('notify', '今日は姫野星奏の誕生日。星奏、誕生日おめでとう。')
+    this.requestUpdate()
   }
+
+
 }

@@ -14,7 +14,7 @@ export class SenaLinks extends LitElement {
     {
       name: 'RomiNest',
       description: "Author's nest...",
-      url: 'https://hotaru.icu'
+      url: 'https://i.arimuraromi.com'
     },
     {
       name: 'Blacklist | 黑名单',
